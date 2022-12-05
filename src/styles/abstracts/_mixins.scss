@@ -1,0 +1,19 @@
+@use './variables' as *;
+
+@mixin tablet-up {
+  @media only screen and (min-width: $tablet-up) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: $desktop) {
+    @content;
+  }
+}
+
+@mixin hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,30 @@
+// https: //itnext.io/structuring-your-sass-projects-c8d41fa55ed4
+
+// abstract
+@use './abstracts/functions';
+@use './abstracts/mixins';
+@use './abstracts/variables';
+
+// base
+@use './base/reset';
+@use './base/typography';
+
+// components
+@use './components/button';
+
+// layout
+@use './layout/grid';
+@use './layout/forms';
+@use './layout/navigation';
+@use './layout/header';
+@use './layout/sidebar';
+@use './layout/footer';
+
+// pages
+@use './pages/home';
+
+// theme
+@use './themes/theme';
+
+// vendor
+// @use './vendors';
