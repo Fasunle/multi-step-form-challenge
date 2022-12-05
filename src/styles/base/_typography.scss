@@ -26,11 +26,11 @@ html {
 /*16px*/
 
 body {
-  background: $background-clr-1;
+  background: hsl(0, 0%, 100%);
   font-family: $base-font;
   font-weight: 400;
   line-height: 1.75;
-  color: $text-clr;
+  color: $text-clr-1;
 }
 
 h1,
