@@ -1,2 +1,18 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
+
+.content {
+  top: 4.5rem;
+  position: absolute;
+  max-width: 25.9375rem;
+  padding-inline: 1em;
+
+  @include tablet-up {
+    top: unset;
+    position: static;
+    margin: 1em;
+    margin-left: 21.6875rem;
+    max-width: unset;
+    padding: 0;
+  }
+}
