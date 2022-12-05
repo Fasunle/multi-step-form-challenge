@@ -43,6 +43,7 @@
     @include tablet-up {
       display: inline-block;
       text-transform: uppercase;
+      line-height: 1;
 
       .title {
         color: $text-clr-2;
