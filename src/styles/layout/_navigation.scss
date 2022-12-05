@@ -1,0 +1,60 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.nav {
+  &__item {
+    display: flex;
+    place-items: center;
+    gap: 1rem;
+
+    .numbered {
+      height: 2em;
+      width: 2em;
+      border-radius: 50%;
+      border: 2px solid $background-clr-2;
+      color: $background-clr-2;
+
+      font-size: 1.3rem;
+      font-weight: 500;
+
+      // center content
+      display: grid;
+      place-content: center;
+
+      // make clickable
+      &:hover {
+        background-color: darken(#bce0ff, 5%);
+        color: $text-clr-1;
+        cursor: pointer;
+      }
+
+      // active step indicator
+      > .active {
+        background-color: #bce0ff;
+        border: none;
+        color: $text-clr-1;
+      }
+    }
+  }
+
+  &__item--info {
+    display: none;
+
+    @include tablet-up {
+      display: inline-block;
+      text-transform: uppercase;
+
+      .title {
+        color: $text-clr-2;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      .desc {
+        color: $text-clr-3;
+        font-size: 1.175rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
