@@ -58,3 +58,28 @@
     }
   }
 }
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 0;
+
+  .btn--prev-page {
+    color: $text-clr-2;
+    font-weight: 500;
+  }
+  .btn--next-page {
+    background-color: $primary-clr;
+    color: #fff;
+  }
+
+  @include tablet-up {
+    position: absolute;
+    right: 6rem;
+    left: 27rem;
+    bottom: 3rem;
+
+    max-width: 80%;
+    margin: auto;
+  }
+}

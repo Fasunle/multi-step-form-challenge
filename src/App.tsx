@@ -77,6 +77,10 @@ const App = () => {
         using our platform. If you ever need support, please feel free to email
         us at support@loremgaming.com.
         {/* Step 5 end  */}
+        <div className='controls'>
+          <button className='btn btn--prev-page'>Go Back</button>
+          <button className='btn btn--next-page'>Next Step</button>
+        </div>
       </main>
     </div>
   );
