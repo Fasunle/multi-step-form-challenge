@@ -34,14 +34,14 @@ const App = () => {
               <span className='numbered'>3</span>
               <div className='nav__item--info'>
                 <h4 className='title'>Step 3</h4>
-                <p className='desc'>Pick add-ons</p>
+                <p className='desc'>Add-ons</p>
               </div>
             </li>
             <li className='nav__item'>
               <span className='numbered'>4</span>
               <div className='nav__item--info'>
                 <h4 className='title'>Step 4</h4>
-                <p className='desc'>Finishing up</p>
+                <p className='desc'>Summary</p>
               </div>
             </li>
           </ul>
@@ -77,6 +77,10 @@ const App = () => {
         using our platform. If you ever need support, please feel free to email
         us at support@loremgaming.com.
         {/* Step 5 end  */}
+        <div className='controls'>
+          <button className='btn btn--prev-page'>Go Back</button>
+          <button className='btn btn--next-page'>Next Step</button>
+        </div>
       </main>
     </div>
   );
