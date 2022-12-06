@@ -20,6 +20,7 @@
       // center content
       display: grid;
       place-content: center;
+      background-color: transparent;
 
       // make clickable
       &:hover {
@@ -27,14 +28,14 @@
         color: $text-clr-1;
         cursor: pointer;
       }
-
-      // active step indicator
-      > .active {
-        background-color: #bce0ff;
-        border: none;
-        color: $text-clr-1;
-      }
     }
+  }
+
+  // active step indicator
+  .active .numbered {
+    background-color: #bce0ff;
+    border: none;
+    color: $text-clr-1;
   }
 
   &__item--info {
@@ -88,10 +89,6 @@
   }
 
   @include tablet-up {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
     position: unset;
     height: fit-content;
 
