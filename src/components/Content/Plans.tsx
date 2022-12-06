@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {PlanPropTypes} from '../interface';
 
 export default function Plan({subcriptions}: {subcriptions: PlanPropTypes[]}) {
+  const [isYear, toggleTime] = useState(false);
   return (
     <section className='step plan'>
       <div>
@@ -28,7 +29,10 @@ export default function Plan({subcriptions}: {subcriptions: PlanPropTypes[]}) {
       <div className='subscriptions__control'>
         <span className='time--month'>Monthly</span>
         <div className='slider'>
-          <button className='btn btn--slider'></button>
+          <button
+            className={`btn btn--slider ${isYear ? 'yearly' : ''}`}
+            onClick={() => toggleTime(!isYear)}
+          ></button>
         </div>
         <span className='time--year'>Yearly</span>
       </div>
