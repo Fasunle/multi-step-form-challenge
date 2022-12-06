@@ -63,7 +63,7 @@ const App = () => {
           onSubmit={handleSubmit((data) => handleConfirm(data))}
         >
           {step === 1 && <PersonalInfo register={register} errors={errors} />}
-          {step === 2 && <Plan subcriptions={sub} />}
+          {step === 2 && <Plan subscriptions={sub} />}
           {step === 3 && <AddOn register={register} />}
           {step === 4 && <Summary summary={summary} />}
         </form>

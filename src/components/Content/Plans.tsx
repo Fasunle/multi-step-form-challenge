@@ -1,8 +1,38 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {PlanPropTypes} from '../interface';
 
-export default function Plan({subcriptions}: {subcriptions: PlanPropTypes[]}) {
+export default function Plan({
+  subscriptions: subs,
+}: {
+  subscriptions: PlanPropTypes[];
+}) {
   const [isYear, toggleTime] = useState(false);
+  const [subscriptions, setSubscriptions] = useState<PlanPropTypes[]>(subs);
+  useEffect(() => {
+    if (isYear) {
+      const sub = [
+        {
+          imageUrl: '/images/icon-arcade.svg',
+          title: 'Arcade',
+          price: '$99/mo',
+        },
+        {
+          imageUrl: '/images/icon-advanced.svg',
+          title: 'Advanced',
+          price: '$120/mo',
+        },
+        {
+          imageUrl: '/images/icon-pro.svg',
+          title: 'Pro',
+          price: '$150/mo',
+        },
+      ];
+
+      setSubscriptions(sub);
+    } else {
+      setSubscriptions(subs);
+    }
+  }, [isYear]);
   return (
     <section className='step plan'>
       <div>
@@ -13,7 +43,7 @@ export default function Plan({subcriptions}: {subcriptions: PlanPropTypes[]}) {
       </div>
 
       <div className='subscriptions'>
-        {subcriptions.map((subscription) => (
+        {subscriptions.map((subscription) => (
           <div className='subscription' key={subscription.title}>
             <div className='imgContainer'>
               <img src={subscription.imageUrl} alt={subscription.title} />
