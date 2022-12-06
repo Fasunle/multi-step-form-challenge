@@ -1,45 +1,19 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
-// hero layout
-.hero {
-  img {
-    max-height: 15.0625rem;
-  }
-  @include tablet-up {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    bottom: 1rem;
-    z-index: -10;
-
-    img {
-      height: calc(100vh - 2rem);
-      max-height: unset;
-    }
-  }
-}
 
 .nav {
-  // positioning
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-
   // layout
   .nav__items {
     display: flex;
     justify-content: center;
     gap: 1rem;
     padding: 0;
+    margin-top: 2em;
   }
 
   padding-inline: 1em;
 
   @include tablet-up {
-    top: 1rem;
-    left: 1rem;
-    bottom: 1rem;
     max-width: 19.6875rem;
 
     // layout
