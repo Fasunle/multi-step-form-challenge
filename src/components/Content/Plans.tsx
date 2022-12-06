@@ -2,15 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {PlanPropTypes} from '../interface';
 
 export default function Plan({
-  subscriptions: subs,
+  subscriptions: monthlySub,
 }: {
   subscriptions: PlanPropTypes[];
 }) {
   const [isYear, toggleTime] = useState(false);
-  const [subscriptions, setSubscriptions] = useState<PlanPropTypes[]>(subs);
+  const [subscriptions, setSubscriptions] =
+    useState<PlanPropTypes[]>(monthlySub);
   useEffect(() => {
     if (isYear) {
-      const sub = [
+      const yearlySub = [
         {
           imageUrl: '/images/icon-arcade.svg',
           title: 'Arcade',
@@ -28,9 +29,9 @@ export default function Plan({
         },
       ];
 
-      setSubscriptions(sub);
+      setSubscriptions(yearlySub);
     } else {
-      setSubscriptions(subs);
+      setSubscriptions(monthlySub);
     }
   }, [isYear]);
   return (
