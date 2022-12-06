@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Header from './components/Header';
 import {AddOn, PersonalInfo, Plan, Summary} from './components/Content';
-import {IUserProfile} from './components/interface';
+import {IAddOn, IUserProfile} from './components/interface';
 
 const App = () => {
   const [step, setStep] = useState(1);
@@ -10,7 +10,7 @@ const App = () => {
     register,
     formState: {errors},
     handleSubmit,
-  } = useForm<IUserProfile>();
+  } = useForm<IUserProfile & IAddOn>();
   const sub = [
     {
       imageUrl: '/images/icon-arcade.svg',
@@ -61,7 +61,7 @@ const App = () => {
         <form className='form' onSubmit={handleSubmit(handleConfirm)}>
           {step === 1 && <PersonalInfo register={register} errors={errors} />}
           {step === 2 && <Plan subcriptions={sub} />}
-          {step === 3 && <AddOn />}
+          {step === 3 && <AddOn register={register} />}
           {step === 4 && <Summary summary={summary} />}
         </form>
 

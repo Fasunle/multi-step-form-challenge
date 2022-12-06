@@ -17,12 +17,22 @@ export type SummaryPropTypes = {
 };
 
 export interface IUserProfile {
-  email: string;
-  name: string;
-  phone: string;
+  email?: string;
+  name?: string;
+  phone?: string;
 }
 
 export type PersonalType = {
   register: UseFormRegister<RegisterOptions & IUserProfile>;
   errors: Partial<FieldErrorsImpl<IUserProfile>>;
+};
+
+export interface IAddOn {
+  online?: boolean;
+  storage?: boolean;
+  customProfile?: boolean;
+}
+
+export type AddOnType = {
+  register: UseFormRegister<RegisterOptions & IAddOn>;
 };
