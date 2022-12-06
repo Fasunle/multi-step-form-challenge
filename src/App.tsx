@@ -1,9 +1,16 @@
 import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
 import Header from './components/Header';
 import {AddOn, PersonalInfo, Plan, Summary} from './components/Content';
+import {IUserProfile} from './components/interface';
 
 const App = () => {
   const [step, setStep] = useState(1);
+  const {
+    register,
+    formState: {errors},
+    handleSubmit,
+  } = useForm<IUserProfile>();
   const sub = [
     {
       imageUrl: '/images/icon-arcade.svg',
@@ -43,12 +50,16 @@ const App = () => {
 
   const gotoStep = (des: number) => setStep(des);
 
+  const handleConfirm = ({email, name, phone}: IUserProfile) => {
+    console.log({email, name, phone});
+  };
+
   return (
     <div className='container'>
       <Header step={step} gotoStep={gotoStep} />
       <main className='content'>
-        <form className='form'>
-          {step === 1 && <PersonalInfo />}
+        <form className='form' onSubmit={handleSubmit(handleConfirm)}>
+          {step === 1 && <PersonalInfo register={register} errors={errors} />}
           {step === 2 && <Plan subcriptions={sub} />}
           {step === 3 && <AddOn />}
           {step === 4 && <Summary summary={summary} />}
