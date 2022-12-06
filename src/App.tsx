@@ -58,7 +58,10 @@ const App = () => {
     <div className='container'>
       <Header step={step} gotoStep={gotoStep} />
       <main className='content'>
-        <form className='form' onSubmit={handleSubmit(handleConfirm)}>
+        <form
+          className='form'
+          onSubmit={handleSubmit((data) => handleConfirm(data))}
+        >
           {step === 1 && <PersonalInfo register={register} errors={errors} />}
           {step === 2 && <Plan subcriptions={sub} />}
           {step === 3 && <AddOn register={register} />}

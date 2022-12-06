@@ -30,6 +30,7 @@ export default function Plan({subcriptions}: {subcriptions: PlanPropTypes[]}) {
         <span className='time--month'>Monthly</span>
         <div className='slider'>
           <button
+            type='button'
             className={`btn btn--slider ${isYear ? 'yearly' : ''}`}
             onClick={() => toggleTime(!isYear)}
           ></button>
