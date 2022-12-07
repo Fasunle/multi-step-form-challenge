@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
 import Header from './components/Header';
-import {AddOn, PersonalInfo, Plan, Summary} from './components/Content';
+import {
+  AddOn,
+  Complete,
+  PersonalInfo,
+  Plan,
+  Summary,
+} from './components/Content';
 import {IStore} from './components/interface';
 import ControlSteps from './components/ControlSteps';
 
@@ -82,9 +88,8 @@ const App = () => {
             store={store}
           />
         )}
-        {step !== 4 && step !== 1 && (
-          <ControlSteps step={step} updateStep={setStep} />
-        )}
+        {step === 5 && <Complete />}
+        {step !== 1 && <ControlSteps step={step} updateStep={setStep} />}
       </main>
     </div>
   );

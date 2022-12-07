@@ -13,6 +13,12 @@ export default function ControlSteps({
     if (step < 4) updateStep(step + 1);
   };
 
+  console.log(step);
+
+  const handleConfirm = () => {
+    updateStep(step + 1);
+  };
+
   if (step === 4)
     return (
       <div className='controls'>
@@ -22,7 +28,7 @@ export default function ControlSteps({
         <button
           className='btn btn--next-page right'
           type='submit'
-          onClick={() => {}}
+          onClick={handleConfirm}
         >
           Confirm
         </button>
@@ -38,7 +44,7 @@ export default function ControlSteps({
       ) : (
         <div />
       )}
-      {step !== 4 && (
+      {step !== 4 && step !== 5 && (
         <button className='btn btn--next-page right' onClick={nextStep}>
           Next Step
         </button>
