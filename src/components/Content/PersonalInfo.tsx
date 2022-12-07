@@ -1,20 +1,24 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
-import {ControlStepsPropTypes, IUserProfile} from '../interface';
+import {ControlStepsPropTypes, IStore, IUserProfile} from '../interface';
 
 export default function PersonalInfo({
   step,
   updateStep,
-}: ControlStepsPropTypes) {
+  store,
+  updateStore,
+}: ControlStepsPropTypes & {store: IStore; updateStore(store: IStore): void}) {
   const {
     register,
     formState: {errors},
     handleSubmit,
   } = useForm<IUserProfile>();
 
-  const validateProfile = (payload: IUserProfile) => {
+  const validateProfile = ({email, name, phone}: IUserProfile) => {
+    updateStore({...store, name, email, phone});
     updateStep(step + 1);
   };
+
   return (
     <section className='step'>
       <div>
@@ -24,18 +28,19 @@ export default function PersonalInfo({
         </p>
       </div>
       <form onSubmit={handleSubmit(validateProfile)} className='form'>
-        <div>
+        <div className={errors.name?.message ? 'error' : ''}>
           <div className='label'>
             <label htmlFor='name'>Name</label>
             <span className='error'>{errors.name?.message}</span>
           </div>
           <input
-            {...register('name', {required: 'Name is required'})}
+            {...register('name', {required: 'Name is required', min: 7})}
             className='name'
             placeholder='e.g Stephen King'
+            defaultValue={store.name ?? 'e.g Stephen King'}
           />
         </div>
-        <div>
+        <div className={errors.email?.message ? 'error' : ''}>
           <div className='label'>
             <label htmlFor='email'>Email Address</label>
             <span className='error'>{errors.email?.message}</span>
@@ -51,9 +56,10 @@ export default function PersonalInfo({
             })}
             className='email'
             placeholder='e.g stephenking@lorem.com'
+            defaultValue={store.email ?? 'e.g stephenking@lorem.com'}
           />
         </div>
-        <div>
+        <div className={errors.phone?.message ? 'error' : ''}>
           <div className='label'>
             <label htmlFor='phone'>Phone Number</label>
             <span className='error'>{errors.phone?.message}</span>
@@ -73,6 +79,7 @@ export default function PersonalInfo({
             })}
             className='phone'
             placeholder='e.g +1 234 567 890'
+            defaultValue={store.phone ?? 'e.g +1 234 567 890'}
           />
         </div>
         <div className='controls'>

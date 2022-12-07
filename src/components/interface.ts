@@ -11,9 +11,9 @@ export type SummaryPropTypes = {
 };
 
 export interface IUserProfile {
-  email?: string;
-  name?: string;
-  phone?: string;
+  email: string;
+  name: string;
+  phone: string;
 }
 export interface IAddOn {
   online?: boolean;

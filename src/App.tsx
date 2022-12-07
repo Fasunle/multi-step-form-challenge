@@ -64,7 +64,14 @@ const App = () => {
     <div className='container'>
       <Header step={step} gotoStep={gotoStep} />
       <main className='content'>
-        {step === 1 && <PersonalInfo step={step} updateStep={setStep} />}
+        {step === 1 && (
+          <PersonalInfo
+            store={store}
+            updateStore={updateStore}
+            step={step}
+            updateStep={setStep}
+          />
+        )}
         {step === 2 && <Plan store={store} updateStore={updateStore} />}
         {step === 3 && <AddOn store={store} updateStore={updateStore} />}
         {step === 4 && (
@@ -75,7 +82,9 @@ const App = () => {
             store={store}
           />
         )}
-        <ControlSteps step={step} updateStep={setStep} />
+        {step !== 4 && step !== 1 && (
+          <ControlSteps step={step} updateStep={setStep} />
+        )}
       </main>
     </div>
   );
