@@ -9,8 +9,10 @@ export default function Plan({
   updateStore(store: IStore): void;
 }) {
   const [select, setSelect] = useState('Arcade');
+
+  const isYear = store.subscription.type === 'yearly';
+
   const toggleTime = () => {
-    const isYear = store.subscription.type === 'yearly';
     if (isYear) {
       updateStore({
         ...store,
@@ -23,15 +25,20 @@ export default function Plan({
       });
     }
   };
+
   const Subscription = ({
     imageUrl,
     title,
     monthly,
-    price,
     yearly,
     isSelected,
     ...props
-  }: PlanPropTypes & {onClick(): void; isSelected: boolean}) => (
+  }: PlanPropTypes & {
+    onClick(): void;
+    isSelected: boolean;
+    monthly: number;
+    yearly: number;
+  }) => (
     <div
       className={`subscription ${isSelected ? 'select' : ''}`}
       key={title}
@@ -42,9 +49,7 @@ export default function Plan({
       </div>
       <div className='details'>
         <h4 className='title'>{title}</h4>
-        <p className='price'>
-          {store.subscription.type === 'yearly' ? yearly : monthly}
-        </p>
+        <p className='price'>{isYear ? `$${yearly}/yr` : `$${monthly}/mo`}</p>
       </div>
     </div>
   );
@@ -56,6 +61,7 @@ export default function Plan({
     });
     setSelect(title);
   };
+
   return (
     <section className='step plan'>
       <div>
@@ -69,41 +75,41 @@ export default function Plan({
         <Subscription
           imageUrl='/images/icon-arcade.svg'
           title='Arcade'
-          monthly='$9/mo'
-          yearly='$99/year'
+          monthly={9}
+          yearly={99}
           onClick={() => handleUpdateStoreTitle('Arcade')}
           isSelected={select === 'Arcade'}
         />
         <Subscription
           imageUrl='/images/icon-advanced.svg'
           title='Advanced'
-          monthly='$12/mo'
-          yearly='$120/year'
+          monthly={12}
+          yearly={120}
           onClick={() => handleUpdateStoreTitle('Advanced')}
           isSelected={select === 'Advanced'}
         />
         <Subscription
           imageUrl='/images/icon-pro.svg'
           title='Pro'
-          monthly='$15/mo'
-          yearly='$150/year'
+          monthly={15}
+          yearly={150}
           onClick={() => handleUpdateStoreTitle('Pro')}
           isSelected={select === 'Pro'}
         />
       </div>
 
-      <div className='subscriptions__control'>
-        <span className='time--month'>Monthly</span>
+      <div className='subscriptions__control select'>
+        <span className={isYear ? '' : 'time--month'}>Monthly</span>
         <div className='slider'>
           <button
+            draggable={true}
             type='button'
-            className={`btn btn--slider ${
-              store.subscription.type === 'yearly' ? 'yearly' : ''
-            }`}
+            className={`btn btn--slider ${isYear ? 'yearly' : ''}`}
+            onDragEnd={() => toggleTime()}
             onClick={() => toggleTime()}
           ></button>
         </div>
-        <span className='time--year'>Yearly</span>
+        <span className={isYear ? 'time--year' : ''}>Yearly</span>
       </div>
     </section>
   );

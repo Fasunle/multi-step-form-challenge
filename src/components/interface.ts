@@ -1,15 +1,12 @@
 export type PlanPropTypes = {
   title: string;
   imageUrl: string;
-  price?: string;
-  monthly?: string;
-  yearly?: string;
 };
 
 export type SummaryPropTypes = {
   subTitle: string;
-  monthly: string;
-  yearly: string;
+  monthly: number;
+  yearly: number;
   addOns: IAddOnItem[];
 };
 
@@ -30,8 +27,8 @@ export type ControlStepsPropTypes = {
 };
 export interface IAddOnItem {
   title: string;
-  monthly: string;
-  yearly: string;
+  monthly: number;
+  yearly: number;
 }
 
 export interface IStore {
@@ -41,7 +38,6 @@ export interface IStore {
   subscription: {
     type: 'monthly' | 'yearly';
     title: string;
-    price: string;
     addOns: IAddOnItem[];
   };
 }
