@@ -5,7 +5,14 @@ type HeaderPropsType = {
   gotoStep: (step: number) => void;
 };
 
-export default function Header({step, gotoStep}: HeaderPropsType) {
+export default function Header({
+  step,
+  gotoStep,
+  isValidated,
+}: HeaderPropsType & {isValidated: boolean}) {
+  const isValid = (step: number) => {
+    if (isValidated) gotoStep(step);
+  };
   return (
     <header>
       <nav className='nav'>
@@ -20,7 +27,7 @@ export default function Header({step, gotoStep}: HeaderPropsType) {
             </div>
           </li>
           <li className={`nav__item${step === 2 ? ' active' : ''}`}>
-            <button className='numbered' onClick={() => gotoStep(2)}>
+            <button className='numbered' onClick={() => isValid(2)}>
               2
             </button>
             <div className='nav__item--info'>
@@ -29,7 +36,7 @@ export default function Header({step, gotoStep}: HeaderPropsType) {
             </div>
           </li>
           <li className={`nav__item${step === 3 ? ' active' : ''}`}>
-            <button className='numbered' onClick={() => gotoStep(3)}>
+            <button className='numbered' onClick={() => isValid(3)}>
               3
             </button>
             <div className='nav__item--info'>
@@ -38,7 +45,7 @@ export default function Header({step, gotoStep}: HeaderPropsType) {
             </div>
           </li>
           <li className={`nav__item${step === 4 ? ' active' : ''}`}>
-            <button className='numbered' onClick={() => gotoStep(4)}>
+            <button className='numbered' onClick={() => isValid(4)}>
               4
             </button>
             <div className='nav__item--info'>

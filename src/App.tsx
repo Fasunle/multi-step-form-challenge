@@ -62,7 +62,7 @@ const App = () => {
 
   return (
     <div className='container'>
-      <Header step={step} gotoStep={gotoStep} />
+      <Header step={step} gotoStep={gotoStep} isValidated={store.name !== ''} />
       <main className='content'>
         {step === 1 && (
           <PersonalInfo
