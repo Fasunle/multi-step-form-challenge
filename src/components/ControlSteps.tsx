@@ -5,7 +5,6 @@ export default function ControlSteps({
   step,
   updateStep,
 }: ControlStepsPropTypes) {
-  console.log(step);
   const prevStep = () => {
     if (step > 1) updateStep(step - 1);
   };
@@ -39,7 +38,7 @@ export default function ControlSteps({
       ) : (
         <div />
       )}
-      {step !== 1 && step !== 4 && (
+      {step !== 4 && (
         <button className='btn btn--next-page right' onClick={nextStep}>
           Next Step
         </button>
