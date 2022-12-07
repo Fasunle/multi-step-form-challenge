@@ -1,39 +1,47 @@
-import React, {useEffect, useState} from 'react';
-import {PlanPropTypes} from '../interface';
+import React from 'react';
+import {IStore, PlanPropTypes} from '../interface';
 
 export default function Plan({
-  subscriptions: monthlySub,
+  store,
+  updateStore,
 }: {
-  subscriptions: PlanPropTypes[];
+  store: IStore;
+  updateStore(store: IStore): void;
 }) {
-  const [isYear, toggleTime] = useState(false);
-  const [subscriptions, setSubscriptions] =
-    useState<PlanPropTypes[]>(monthlySub);
-  useEffect(() => {
+  const toggleTime = () => {
+    const isYear = store.subscription.type === 'yearly';
     if (isYear) {
-      const yearlySub = [
-        {
-          imageUrl: '/images/icon-arcade.svg',
-          title: 'Arcade',
-          price: '$99/mo',
-        },
-        {
-          imageUrl: '/images/icon-advanced.svg',
-          title: 'Advanced',
-          price: '$120/mo',
-        },
-        {
-          imageUrl: '/images/icon-pro.svg',
-          title: 'Pro',
-          price: '$150/mo',
-        },
-      ];
-
-      setSubscriptions(yearlySub);
+      updateStore({
+        ...store,
+        subscription: {...store.subscription, type: 'monthly'},
+      });
     } else {
-      setSubscriptions(monthlySub);
+      updateStore({
+        ...store,
+        subscription: {...store.subscription, type: 'yearly'},
+      });
     }
-  }, [isYear]);
+  };
+  const Subscription = ({
+    imageUrl,
+    title,
+    monthly,
+    price,
+    yearly,
+    ...props
+  }: PlanPropTypes & {onClick(): void}) => (
+    <div className='subscription' key={title} {...props}>
+      <div className='imgContainer'>
+        <img src={imageUrl} alt={title} />
+      </div>
+      <div className='details'>
+        <h4 className='title'>{title}</h4>
+        <p className='price'>
+          {store.subscription.type === 'yearly' ? yearly : monthly}
+        </p>
+      </div>
+    </div>
+  );
   return (
     <section className='step plan'>
       <div>
@@ -44,17 +52,42 @@ export default function Plan({
       </div>
 
       <div className='subscriptions'>
-        {subscriptions.map((subscription) => (
-          <div className='subscription' key={subscription.title}>
-            <div className='imgContainer'>
-              <img src={subscription.imageUrl} alt={subscription.title} />
-            </div>
-            <div className='details'>
-              <h4 className='title'>{subscription.title}</h4>
-              <p className='price'>{subscription.price}</p>
-            </div>
-          </div>
-        ))}
+        <Subscription
+          imageUrl='/images/icon-arcade.svg'
+          title='Arcade'
+          monthly='$9/mo'
+          yearly='$99/year'
+          onClick={() =>
+            updateStore({
+              ...store,
+              subscription: {...store.subscription, title: 'Arcade'},
+            })
+          }
+        />
+        <Subscription
+          imageUrl='/images/icon-advanced.svg'
+          title='Advanced'
+          monthly='$12/mo'
+          yearly='$120/year'
+          onClick={() =>
+            updateStore({
+              ...store,
+              subscription: {...store.subscription, title: 'Advanced'},
+            })
+          }
+        />
+        <Subscription
+          imageUrl='/images/icon-pro.svg'
+          title='Pro'
+          monthly='$15/mo'
+          yearly='$150/year'
+          onClick={() =>
+            updateStore({
+              ...store,
+              subscription: {...store.subscription, title: 'Pro'},
+            })
+          }
+        />
       </div>
 
       <div className='subscriptions__control'>
@@ -62,8 +95,10 @@ export default function Plan({
         <div className='slider'>
           <button
             type='button'
-            className={`btn btn--slider ${isYear ? 'yearly' : ''}`}
-            onClick={() => toggleTime(!isYear)}
+            className={`btn btn--slider ${
+              store.subscription.type === 'yearly' ? 'yearly' : ''
+            }`}
+            onClick={() => toggleTime()}
           ></button>
         </div>
         <span className='time--year'>Yearly</span>

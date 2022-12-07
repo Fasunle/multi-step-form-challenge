@@ -1,94 +1,77 @@
 import React, {useState} from 'react';
-import {useForm} from 'react-hook-form';
 import Header from './components/Header';
 import {AddOn, PersonalInfo, Plan, Summary} from './components/Content';
-import {IAddOn, IUserProfile} from './components/interface';
+import {IStore} from './components/interface';
+import ControlSteps from './components/ControlSteps';
 
+const initialStore: IStore = {
+  email: '',
+  name: '',
+  phone: '',
+  subscription: {
+    addOns: [],
+    price: '$9/mo',
+    title: 'Arcade',
+    type: 'monthly',
+  },
+};
 const App = () => {
+  const [store, updateStore] = useState<IStore>(initialStore);
   const [step, setStep] = useState(1);
-  const {
-    register,
-    formState: {errors, isValid},
-    handleSubmit,
-    watch,
-  } = useForm<IUserProfile & IAddOn>();
+
+  const time = store.subscription.type === 'yearly';
   const sub = [
     {
       imageUrl: '/images/icon-arcade.svg',
       title: 'Arcade',
-      price: '$9/mo',
+      monthly: '$9/mo',
+      yearly: '$99/yr',
     },
     {
       imageUrl: '/images/icon-advanced.svg',
       title: 'Advanced',
-      price: '$12/mo',
+      monthly: '$12/mo',
+      yearly: '$120/yr',
     },
     {
       imageUrl: '/images/icon-pro.svg',
       title: 'Pro',
-      price: '$15/mo',
+      monthly: '$15/mo',
+      yearly: '$150/yr',
     },
   ];
 
-  const summary = {
-    subTitle: 'Arcade (Monthly)',
-    price: '+9/mo',
-    addOns: [
-      {
-        title: 'storage',
-        price: '+$2/mo',
-      },
-    ],
-  };
-
-  const prevStep = () => {
-    if (step > 1) setStep(step - 1);
-  };
-
-  const nextStep = () => {
-    if (step < 4) setStep(step + 1);
+  const getSummary = () => {
+    const defaultInfo = {
+      imageUrl: '/images/icon-arcade.svg',
+      title: 'Arcade',
+      monthly: '$9/mo',
+      yearly: '$99/yr',
+    };
+    const info =
+      sub.find((item) => item.title === store.subscription.title) ??
+      defaultInfo;
+    return {
+      subTitle: `${store.subscription.title} (${time ? 'Yearly' : 'Monthly'})`,
+      monthly: info.monthly,
+      yearly: info.yearly,
+      addOns: store.subscription.addOns,
+    };
   };
 
   const gotoStep = (des: number) => setStep(des);
 
-  const handleConfirm = (data?: IAddOn & IUserProfile) => {
-    console.log(watcher);
-  };
-
-  const watcher = watch();
   return (
     <div className='container'>
       <Header step={step} gotoStep={gotoStep} />
       <main className='content'>
-        <form className='form' onSubmit={handleSubmit(handleConfirm)}>
-          {step === 1 && <PersonalInfo register={register} errors={errors} />}
-          {step === 2 && <Plan subscriptions={sub} />}
-          {step === 3 && <AddOn register={register} />}
-          {step === 4 && <Summary summary={summary} />}
-        </form>
-
-        <div className='controls'>
-          {step > 1 ? (
-            <button className='btn btn--prev-page' onClick={prevStep}>
-              Go Back
-            </button>
-          ) : (
-            <div />
-          )}
-          {step === 4 ? (
-            <button
-              className='btn btn--next-page right'
-              type='submit'
-              onClick={() => handleConfirm()}
-            >
-              Confirm
-            </button>
-          ) : (
-            <button className='btn btn--next-page right' onClick={nextStep}>
-              Next Step
-            </button>
-          )}
-        </div>
+        {step === 1 && <PersonalInfo step={step} updateStep={setStep} />}
+        {step === 2 && <Plan store={store} updateStore={updateStore} />}
+        {step === 3 && <AddOn store={store} updateStore={updateStore} />}
+        {step === 4 && (
+          <Summary summary={getSummary()} isYear={time} gotoStep={gotoStep} />
+        )}
+        <ControlSteps step={step} updateStep={setStep} />
       </main>
     </div>
   );

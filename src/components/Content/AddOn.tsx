@@ -1,12 +1,106 @@
 import React, {useState} from 'react';
-import {AddOnType} from '../interface';
+import {IStore} from '../interface';
 
-export default function AddOn({register}: AddOnType) {
+export default function AddOn({
+  store,
+  updateStore,
+}: {
+  store: IStore;
+  updateStore(store: IStore): void;
+}) {
   const [select, setSelect] = useState({
     online: '',
     storage: '',
     customProfile: '',
   });
+
+  const handleSelectOnlineAddOn = (add: boolean = true) => {
+    const onlineAddOn = {
+      title: 'Online service',
+      monthly: '+$1',
+      yearly: '+$10',
+    };
+    if (add) {
+      setSelect({...select, online: 'select'});
+      updateStore({
+        ...store,
+        subscription: {
+          ...store.subscription,
+          addOns: [...store.subscription.addOns, onlineAddOn],
+        },
+      });
+    } else {
+      setSelect({...select, online: ''});
+      const others = store.subscription.addOns.filter(
+        (item) => item.title !== onlineAddOn.title,
+      );
+      updateStore({
+        ...store,
+        subscription: {...store.subscription, addOns: others},
+      });
+    }
+  };
+  const handleSelectStorageAddOn = (add: boolean = true) => {
+    const extraStorage = {
+      title: 'Larger storage',
+      monthly: '+$2',
+      yearly: '+$20',
+    };
+    if (add) {
+      setSelect({...select, storage: 'select'});
+      const isAdded = store.subscription.addOns.find(
+        (item) => item.title === extraStorage.title,
+      );
+      !isAdded &&
+        updateStore({
+          ...store,
+          subscription: {
+            ...store.subscription,
+            addOns: [...store.subscription.addOns, extraStorage],
+          },
+        });
+    } else {
+      setSelect({...select, storage: ''});
+      const others = store.subscription.addOns.filter(
+        (item) => item.title !== extraStorage.title,
+      );
+      updateStore({
+        ...store,
+        subscription: {...store.subscription, addOns: others},
+      });
+    }
+  };
+  const handleSelectCustomProfileAddOn = (add: boolean = true) => {
+    const customProfileAddOn = {
+      title: 'Customizable profile',
+      monthly: '+$1',
+      yearly: '+$10',
+    };
+
+    if (add) {
+      setSelect({...select, customProfile: 'select'});
+      const isAdded = store.subscription.addOns.find(
+        (item) => item.title === customProfileAddOn.title,
+      );
+      !isAdded &&
+        updateStore({
+          ...store,
+          subscription: {
+            ...store.subscription,
+            addOns: [...store.subscription.addOns, customProfileAddOn],
+          },
+        });
+    } else {
+      setSelect({...select, customProfile: ''});
+      const others = store.subscription.addOns.filter(
+        (item) => item.title !== customProfileAddOn.title,
+      );
+      updateStore({
+        ...store,
+        subscription: {...store.subscription, addOns: others},
+      });
+    }
+  };
 
   return (
     <section className='step'>
@@ -19,10 +113,7 @@ export default function AddOn({register}: AddOnType) {
         <div className={`add-on ${select.online}`}>
           <input
             type='checkbox'
-            {...register('online')}
-            onChange={(e) =>
-              setSelect({...select, online: e.target.checked ? 'select' : ''})
-            }
+            onChange={(e) => handleSelectOnlineAddOn(e.target.checked)}
           />
           <div className='detail'>
             <h3 className='title'>Online service</h3>
@@ -33,10 +124,7 @@ export default function AddOn({register}: AddOnType) {
         <div className={`add-on ${select.storage}`}>
           <input
             type='checkbox'
-            {...register('storage')}
-            onChange={(e) =>
-              setSelect({...select, storage: e.target.checked ? 'select' : ''})
-            }
+            onChange={(e) => handleSelectStorageAddOn(e.target.checked)}
           />
           <div className='detail'>
             <h3 className='title'>Larger storage</h3>
@@ -47,13 +135,7 @@ export default function AddOn({register}: AddOnType) {
         <div className={`add-on ${select.customProfile}`}>
           <input
             type='checkbox'
-            {...register('customProfile')}
-            onChange={(e) =>
-              setSelect({
-                ...select,
-                customProfile: e.target.checked ? 'select' : '',
-              })
-            }
+            onChange={(e) => handleSelectCustomProfileAddOn(e.target.checked)}
           />
           <div className='detail'>
             <h3 className='title'>Customizable Profile</h3>
