@@ -1,7 +1,10 @@
 import React from 'react';
-import {ControllerPropTypes} from './interface';
+import {ControlStepsPropTypes} from './interface';
 
-export default function ControlSteps({step, updateStep}: ControllerPropTypes) {
+export default function ControlSteps({
+  step,
+  updateStep,
+}: ControlStepsPropTypes) {
   console.log(step);
   const prevStep = () => {
     if (step > 1) updateStep(step - 1);

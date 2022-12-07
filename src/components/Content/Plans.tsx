@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {IStore, PlanPropTypes} from '../interface';
 
 export default function Plan({
@@ -8,6 +8,7 @@ export default function Plan({
   store: IStore;
   updateStore(store: IStore): void;
 }) {
+  const [select, setSelect] = useState('Arcade');
   const toggleTime = () => {
     const isYear = store.subscription.type === 'yearly';
     if (isYear) {
@@ -28,9 +29,14 @@ export default function Plan({
     monthly,
     price,
     yearly,
+    isSelected,
     ...props
-  }: PlanPropTypes & {onClick(): void}) => (
-    <div className='subscription' key={title} {...props}>
+  }: PlanPropTypes & {onClick(): void; isSelected: boolean}) => (
+    <div
+      className={`subscription ${isSelected ? 'select' : ''}`}
+      key={title}
+      {...props}
+    >
       <div className='imgContainer'>
         <img src={imageUrl} alt={title} />
       </div>
@@ -42,6 +48,14 @@ export default function Plan({
       </div>
     </div>
   );
+
+  const handleUpdateStoreTitle = (title: string) => {
+    updateStore({
+      ...store,
+      subscription: {...store.subscription, title},
+    });
+    setSelect(title);
+  };
   return (
     <section className='step plan'>
       <div>
@@ -57,36 +71,24 @@ export default function Plan({
           title='Arcade'
           monthly='$9/mo'
           yearly='$99/year'
-          onClick={() =>
-            updateStore({
-              ...store,
-              subscription: {...store.subscription, title: 'Arcade'},
-            })
-          }
+          onClick={() => handleUpdateStoreTitle('Arcade')}
+          isSelected={select === 'Arcade'}
         />
         <Subscription
           imageUrl='/images/icon-advanced.svg'
           title='Advanced'
           monthly='$12/mo'
           yearly='$120/year'
-          onClick={() =>
-            updateStore({
-              ...store,
-              subscription: {...store.subscription, title: 'Advanced'},
-            })
-          }
+          onClick={() => handleUpdateStoreTitle('Advanced')}
+          isSelected={select === 'Advanced'}
         />
         <Subscription
           imageUrl='/images/icon-pro.svg'
           title='Pro'
           monthly='$15/mo'
           yearly='$150/year'
-          onClick={() =>
-            updateStore({
-              ...store,
-              subscription: {...store.subscription, title: 'Pro'},
-            })
-          }
+          onClick={() => handleUpdateStoreTitle('Pro')}
+          isSelected={select === 'Pro'}
         />
       </div>
 
