@@ -51,6 +51,7 @@
 
       @include tablet-up {
         background: url('/images/bg-sidebar-desktop.svg') no-repeat center;
+        border-radius: 10px;
         left: 0;
         min-width: 14rem;
       }
