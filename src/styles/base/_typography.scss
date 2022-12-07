@@ -26,7 +26,7 @@ html {
 /*16px*/
 
 body {
-  background: $background-clr-2;
+  background: lighten($secondary-clr, 10%);
   font-family: $base-font;
   font-weight: 400;
   line-height: 1.75;
