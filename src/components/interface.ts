@@ -1,19 +1,16 @@
-import {
-  FieldErrorsImpl,
-  RegisterOptions,
-  UseFormRegister,
-} from 'react-hook-form';
-
 export type PlanPropTypes = {
   title: string;
   imageUrl: string;
-  price: string;
+  price?: string;
+  monthly?: string;
+  yearly?: string;
 };
 
 export type SummaryPropTypes = {
   subTitle: string;
-  price: string;
-  addOns: Omit<PlanPropTypes, 'imageUrl'>[];
+  monthly: string;
+  yearly: string;
+  addOns: IAddOnItem[];
 };
 
 export interface IUserProfile {
@@ -21,18 +18,30 @@ export interface IUserProfile {
   name?: string;
   phone?: string;
 }
-
-export type PersonalType = {
-  register: UseFormRegister<RegisterOptions & IUserProfile>;
-  errors: Partial<FieldErrorsImpl<IUserProfile>>;
-};
-
 export interface IAddOn {
   online?: boolean;
   storage?: boolean;
   customProfile?: boolean;
 }
 
-export type AddOnType = {
-  register: UseFormRegister<RegisterOptions & IAddOn>;
+export type ControlStepsPropTypes = {
+  step: number;
+  updateStep(step: number): void;
 };
+export interface IAddOnItem {
+  title: string;
+  monthly: string;
+  yearly: string;
+}
+
+export interface IStore {
+  name: string;
+  email: string;
+  phone: string;
+  subscription: {
+    type: 'monthly' | 'yearly';
+    title: string;
+    price: string;
+    addOns: IAddOnItem[];
+  };
+}
