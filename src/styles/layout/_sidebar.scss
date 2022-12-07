@@ -1,0 +1,24 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.nav {
+  // layout
+  .nav__items {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    max-height: fit-content;
+  }
+
+  padding-inline: 1em;
+
+  @include tablet-up {
+    max-width: 19.6875rem;
+
+    // layout
+    .nav__items {
+      flex-direction: column;
+    }
+  }
+}

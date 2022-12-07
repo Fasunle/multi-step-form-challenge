@@ -1,37 +1,97 @@
-import React from 'react';
+import React, {useState} from 'react';
+import Header from './components/Header';
+import {
+  AddOn,
+  Complete,
+  PersonalInfo,
+  Plan,
+  Summary,
+} from './components/Content';
+import {IStore} from './components/interface';
+import ControlSteps from './components/ControlSteps';
 
+const initialStore: IStore = {
+  email: '',
+  name: '',
+  phone: '',
+  subscription: {
+    addOns: [],
+    title: 'Arcade',
+    type: 'monthly',
+  },
+};
 const App = () => {
+  const [store, updateStore] = useState<IStore>(initialStore);
+  const [step, setStep] = useState(1);
+
+  const time = store.subscription.type === 'yearly';
+  const sub = [
+    {
+      imageUrl: '/images/icon-arcade.svg',
+      title: 'Arcade',
+      monthly: 9,
+      yearly: 99,
+    },
+    {
+      imageUrl: '/images/icon-advanced.svg',
+      title: 'Advanced',
+      monthly: 12,
+      yearly: 120,
+    },
+    {
+      imageUrl: '/images/icon-pro.svg',
+      title: 'Pro',
+      monthly: 15,
+      yearly: 150,
+    },
+  ];
+
+  const getSummary = () => {
+    const defaultInfo = {
+      imageUrl: '/images/icon-arcade.svg',
+      title: 'Arcade',
+      monthly: 9,
+      yearly: 99,
+    };
+    const info =
+      sub.find((item) => item.title === store.subscription.title) ??
+      defaultInfo;
+    return {
+      subTitle: `${store.subscription.title} (${time ? 'Yearly' : 'Monthly'})`,
+      monthly: info.monthly,
+      yearly: info.yearly,
+      addOns: store.subscription.addOns,
+    };
+  };
+
+  const gotoStep = (des: number) => setStep(des);
+
   return (
-    <main>
-      {/* Sidebar start  */}
-      Step 1 Your info Step 2 Select plan Step 3 Add-ons Step 4 Summary
-      {/* Sidebar end  */}
-      {/* Step 1 start  */}
-      Personal info Please provide your name, email address, and phone number.
-      Name e.g. Stephen King Email Address e.g. stephenking@lorem.com Phone
-      Number e.g. +1 234 567 890 Next Step
-      {/* Step 1 end  */}
-      {/* Step 2 start  */}
-      Select your plan You have the option of monthly or yearly billing. Arcade
-      $9/mo Advanced $12/mo Pro $15/mo Monthly Yearly Go Back Next Step
-      {/* Step 2 end  */}
-      {/* Step 3 start  */}
-      Pick add-ons Add-ons help enhance your gaming experience. Online service
-      Access to multiplayer games +$1/mo Larger storage Extra 1TB of cloud save
-      +$2/mo Customizable Profile Custom theme on your profile +$2/mo Go Back
-      Next Step
-      {/* Step 3 end  */}
-      {/* Step 4 start  */}
-      Finishing up Double-check everything looks OK before confirming.
-      {/* Dynamically add subscription and add-on selections here  */}
-      Total (per month/year) Go Back Confirm
-      {/* Step 4 end  */}
-      {/* Step 5 start */}
-      Thank you! Thanks for confirming your subscription! We hope you have fun
-      using our platform. If you ever need support, please feel free to email us
-      at support@loremgaming.com.
-      {/* Step 5 end  */}
-    </main>
+    <div className='container'>
+      <Header step={step} gotoStep={gotoStep} isValidated={store.name !== ''} />
+      <main className='content'>
+        {step === 1 && (
+          <PersonalInfo
+            store={store}
+            updateStore={updateStore}
+            step={step}
+            updateStep={setStep}
+          />
+        )}
+        {step === 2 && <Plan store={store} updateStore={updateStore} />}
+        {step === 3 && <AddOn store={store} updateStore={updateStore} />}
+        {step === 4 && (
+          <Summary
+            summary={getSummary()}
+            isYear={time}
+            gotoStep={gotoStep}
+            store={store}
+          />
+        )}
+        {step === 5 && <Complete />}
+        {step !== 1 && <ControlSteps step={step} updateStep={setStep} />}
+      </main>
+    </div>
   );
 };
 

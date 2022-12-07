@@ -1,0 +1,111 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.nav {
+  &__item {
+    display: flex;
+    place-items: center;
+    gap: 1rem;
+
+    .numbered {
+      height: 1.5em;
+      width: 1.5em;
+      border-radius: 50%;
+      border: 2px solid $background-clr-2;
+      color: $background-clr-2;
+
+      font-size: 1.3rem;
+      font-weight: 500;
+
+      // center content
+      display: grid;
+      place-content: center;
+      background-color: transparent;
+
+      // make clickable
+      &:hover {
+        background-color: darken(#bce0ff, 5%);
+        border: none;
+        color: $text-clr-1;
+        cursor: pointer;
+      }
+    }
+
+    @include tablet-up {
+    }
+  }
+
+  // active step indicator
+  .active .numbered {
+    background-color: #bce0ff;
+    border: none;
+    color: $text-clr-1;
+  }
+
+  &__item--info {
+    display: none;
+
+    @include tablet-up {
+      display: inline-block;
+      text-transform: uppercase;
+      line-height: 1;
+
+      .title {
+        color: $text-clr-2;
+        font-size: 1rem;
+        font-weight: 400;
+      }
+
+      .desc {
+        color: $text-clr-3;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  position: absolute;
+
+  height: 5rem;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  .confirm {
+    background-color: $accent-clr !important;
+  }
+
+  .btn--prev-page,
+  .btn--next-page {
+    max-height: fit-content;
+    margin-inline: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .btn--prev-page {
+    color: $text-clr-2;
+    font-weight: 500;
+    &:hover {
+      color: $primary-clr;
+    }
+  }
+  .btn--next-page {
+    background-color: $primary-clr;
+    color: #fff;
+  }
+
+  @include tablet-up {
+    height: fit-content;
+
+    .btn--prev-page,
+    .btn--next-page {
+      margin-inline: 0;
+    }
+  }
+}

@@ -1,0 +1,71 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+input {
+  width: 100%;
+  background-color: darken(#fff, 0.8%);
+  border: 2px solid lighten($border-clr, 30%);
+  border-radius: 5px;
+  padding: 0.25em 0.5em;
+  font-size: 1rem;
+
+  &:focus-within {
+    outline: none;
+  }
+}
+
+.form,
+.step {
+  .title {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .desc {
+    color: $text-clr-2;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    margin-top: 0.5em;
+  }
+
+  .error input {
+    border: 2px solid lighten(red, 35%);
+  }
+
+  .label {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    margin-top: 0.5em;
+
+    .error {
+      display: none;
+
+      @include tablet-up {
+        display: block;
+        color: lighten(red, 20%);
+        font-size: 0.8rem;
+        align-self: flex-end;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.step {
+  background-color: #fff;
+  color: $text-clr-1;
+  margin-bottom: 2em;
+
+  // layout
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  // border style
+  border-radius: 10px;
+
+  @include tablet-up {
+    padding-inline: 1em;
+  }
+}
