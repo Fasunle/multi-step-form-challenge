@@ -50,8 +50,8 @@
       min-height: 10rem;
 
       @include tablet-up {
-        background: url('/images/bg-sidebar-desktop.svg') no-repeat center;
         border-radius: 10px;
+        background: url('/images/bg-sidebar-desktop.svg') no-repeat center;
         left: 0;
         min-width: 14rem;
       }
