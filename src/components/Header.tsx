@@ -55,13 +55,7 @@ export default function Header({
           </li>
         </ul>
       </nav>
-      <picture className='bg-sidebar'>
-        <source
-          media='(min-width: 40em)'
-          srcSet='/images/bg-sidebar-desktop.svg'
-        />
-        <img src='/images/bg-sidebar-mobile.svg' alt='' />
-      </picture>
+      <picture className='bg-sidebar'></picture>
     </header>
   );
 }

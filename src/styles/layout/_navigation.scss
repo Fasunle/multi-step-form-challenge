@@ -2,14 +2,16 @@
 @use '../abstracts/mixins' as *;
 
 .nav {
+  margin-left: 1em;
+  margin-top: 2em;
   &__item {
     display: flex;
     place-items: center;
     gap: 1rem;
 
     .numbered {
-      height: 1.5em;
-      width: 1.5em;
+      aspect-ratio: 1;
+      height: 2em;
       border-radius: 50%;
       border: 2px solid $background-clr-2;
       color: $background-clr-2;
@@ -29,9 +31,9 @@
         color: $text-clr-1;
         cursor: pointer;
       }
-    }
-
-    @include tablet-up {
+      @include tablet-up {
+        height: 1.5em;
+      }
     }
   }
 
