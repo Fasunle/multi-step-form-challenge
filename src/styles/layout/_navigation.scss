@@ -25,6 +25,7 @@
       // make clickable
       &:hover {
         background-color: darken(#bce0ff, 5%);
+        border: none;
         color: $text-clr-1;
         cursor: pointer;
       }

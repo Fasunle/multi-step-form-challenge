@@ -3,8 +3,9 @@
 
 input {
   width: 100%;
+  background-color: darken(#fff, 0.8%);
+  border: 2px solid lighten($border-clr, 30%);
   border-radius: 5px;
-  border: 1px solid $border-clr;
   padding: 0.25em 0.5em;
   font-size: 1rem;
 

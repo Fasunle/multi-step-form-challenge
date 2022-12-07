@@ -8,8 +8,9 @@ const App = () => {
   const [step, setStep] = useState(1);
   const {
     register,
-    formState: {errors},
+    formState: {errors, isValid},
     handleSubmit,
+    watch,
   } = useForm<IUserProfile & IAddOn>();
   const sub = [
     {
@@ -50,18 +51,16 @@ const App = () => {
 
   const gotoStep = (des: number) => setStep(des);
 
-  const handleConfirm = ({email, name, phone}: IUserProfile) => {
-    console.log({email, name, phone});
+  const handleConfirm = (data?: IAddOn & IUserProfile) => {
+    console.log(watcher);
   };
 
+  const watcher = watch();
   return (
     <div className='container'>
       <Header step={step} gotoStep={gotoStep} />
       <main className='content'>
-        <form
-          className='form'
-          onSubmit={handleSubmit((data) => handleConfirm(data))}
-        >
+        <form className='form' onSubmit={handleSubmit(handleConfirm)}>
           {step === 1 && <PersonalInfo register={register} errors={errors} />}
           {step === 2 && <Plan subscriptions={sub} />}
           {step === 3 && <AddOn register={register} />}
@@ -77,7 +76,11 @@ const App = () => {
             <div />
           )}
           {step === 4 ? (
-            <button className='btn btn--next-page right' type='submit'>
+            <button
+              className='btn btn--next-page right'
+              type='submit'
+              onClick={() => handleConfirm()}
+            >
               Confirm
             </button>
           ) : (
