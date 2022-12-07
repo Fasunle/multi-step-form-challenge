@@ -29,10 +29,7 @@ input {
   }
 
   .error input {
-    border: 2px solid red;
-    &::placeholder {
-      color: red;
-    }
+    border: 2px solid lighten(red, 35%);
   }
 
   .label {
@@ -46,9 +43,10 @@ input {
 
       @include tablet-up {
         display: block;
-        color: red;
+        color: lighten(red, 20%);
         font-size: 0.8rem;
         align-self: flex-end;
+        font-weight: 600;
       }
     }
   }

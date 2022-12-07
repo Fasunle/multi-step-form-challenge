@@ -8,8 +8,8 @@
     gap: 1rem;
 
     .numbered {
-      height: 2em;
-      width: 2em;
+      height: 1.5em;
+      width: 1.5em;
       border-radius: 50%;
       border: 2px solid $background-clr-2;
       color: $background-clr-2;
@@ -29,6 +29,9 @@
         color: $text-clr-1;
         cursor: pointer;
       }
+    }
+
+    @include tablet-up {
     }
   }
 
@@ -50,12 +53,12 @@
       .title {
         color: $text-clr-2;
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: 400;
       }
 
       .desc {
         color: $text-clr-3;
-        font-size: 1.175rem;
+        font-size: 1rem;
         font-weight: 500;
       }
     }
@@ -74,6 +77,10 @@
   right: 0;
   left: 0;
 
+  .confirm {
+    background-color: $accent-clr !important;
+  }
+
   .btn--prev-page,
   .btn--next-page {
     max-height: fit-content;
@@ -84,6 +91,9 @@
   .btn--prev-page {
     color: $text-clr-2;
     font-weight: 500;
+    &:hover {
+      color: $primary-clr;
+    }
   }
   .btn--next-page {
     background-color: $primary-clr;
