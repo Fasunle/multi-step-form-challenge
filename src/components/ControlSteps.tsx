@@ -26,7 +26,7 @@ export default function ControlSteps({
           Go Back
         </button>
         <button
-          className='btn btn--next-page right'
+          className='btn btn--next-page right confirm'
           type='submit'
           onClick={handleConfirm}
         >
@@ -37,7 +37,7 @@ export default function ControlSteps({
 
   return (
     <div className='controls'>
-      {step > 1 ? (
+      {step !== 1 && step !== 5 ? (
         <button className='btn btn--prev-page' onClick={prevStep}>
           Go Back
         </button>

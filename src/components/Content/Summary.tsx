@@ -51,16 +51,16 @@ export default function Summary({
           <div className='type' key={addOn.title}>
             <h6 className='title'>{addOn.title}</h6>
             <p className='price'>
-              {isYear ? `${addOn.yearly}/yr` : `$${summary.monthly}/mo`}
+              {isYear ? `$${addOn.yearly}/yr` : `$${summary.monthly}/mo`}
             </p>
           </div>
         ))}
       </div>
 
       <div className='total'>
-        <span className='title'>Total (per Month)</span>
+        <span className='title'>Total (per {isYear ? 'year' : 'yonth'})</span>
         <span className='amount'>
-          {isYear ? `$${calculator(store)}` : `$${calculator(store)}`}
+          {isYear ? `$${calculator(store)}/yr` : `$${calculator(store)}/mo`}
         </span>
       </div>
     </section>

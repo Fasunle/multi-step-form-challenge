@@ -32,12 +32,14 @@ export default function Plan({
     monthly,
     yearly,
     isSelected,
+    discount,
     ...props
   }: PlanPropTypes & {
     onClick(): void;
     isSelected: boolean;
     monthly: number;
     yearly: number;
+    discount: number;
   }) => (
     <div
       className={`subscription ${isSelected ? 'select' : ''}`}
@@ -50,6 +52,13 @@ export default function Plan({
       <div className='details'>
         <h4 className='title'>{title}</h4>
         <p className='price'>{isYear ? `$${yearly}/yr` : `$${monthly}/mo`}</p>
+        {isYear && (
+          <p className='discount'>
+            {discount > 1
+              ? `${discount} months free`
+              : `${discount} month free`}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -79,6 +88,7 @@ export default function Plan({
           yearly={99}
           onClick={() => handleUpdateStoreTitle('Arcade')}
           isSelected={select === 'Arcade'}
+          discount={2}
         />
         <Subscription
           imageUrl='/images/icon-advanced.svg'
@@ -87,6 +97,7 @@ export default function Plan({
           yearly={120}
           onClick={() => handleUpdateStoreTitle('Advanced')}
           isSelected={select === 'Advanced'}
+          discount={2}
         />
         <Subscription
           imageUrl='/images/icon-pro.svg'
@@ -95,6 +106,7 @@ export default function Plan({
           yearly={150}
           onClick={() => handleUpdateStoreTitle('Pro')}
           isSelected={select === 'Pro'}
+          discount={2}
         />
       </div>
 
