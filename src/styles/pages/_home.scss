@@ -272,3 +272,33 @@
     color: $text-clr-2;
   }
 }
+
+// complete form
+.complete {
+  padding: 1em;
+
+  @include tablet-up {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    min-height: 20rem;
+  }
+
+  .imgContainer {
+    aspect-ratio: 1;
+    width: 6rem;
+    margin: auto;
+    @include tablet-up {
+      margin-top: 1em;
+    }
+  }
+
+  .description {
+    margin-top: 2em;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+}

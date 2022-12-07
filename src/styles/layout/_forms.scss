@@ -28,6 +28,13 @@ input {
     margin-top: 0.5em;
   }
 
+  .error input {
+    border: 2px solid red;
+    &::placeholder {
+      color: red;
+    }
+  }
+
   .label {
     display: flex;
     justify-content: space-between;
