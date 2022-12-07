@@ -78,6 +78,7 @@
   .btn--next-page {
     max-height: fit-content;
     margin-inline: 1rem;
+    font-size: 1.2rem;
   }
 
   .btn--prev-page {
@@ -90,7 +91,6 @@
   }
 
   @include tablet-up {
-    position: unset;
     height: fit-content;
 
     .btn--prev-page,
