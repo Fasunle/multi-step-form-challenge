@@ -10,7 +10,6 @@ const initialStore: IStore = {
   phone: '',
   subscription: {
     addOns: [],
-    price: '$9/mo',
     title: 'Arcade',
     type: 'monthly',
   },
@@ -24,20 +23,20 @@ const App = () => {
     {
       imageUrl: '/images/icon-arcade.svg',
       title: 'Arcade',
-      monthly: '$9/mo',
-      yearly: '$99/yr',
+      monthly: 9,
+      yearly: 99,
     },
     {
       imageUrl: '/images/icon-advanced.svg',
       title: 'Advanced',
-      monthly: '$12/mo',
-      yearly: '$120/yr',
+      monthly: 12,
+      yearly: 120,
     },
     {
       imageUrl: '/images/icon-pro.svg',
       title: 'Pro',
-      monthly: '$15/mo',
-      yearly: '$150/yr',
+      monthly: 15,
+      yearly: 150,
     },
   ];
 
@@ -45,8 +44,8 @@ const App = () => {
     const defaultInfo = {
       imageUrl: '/images/icon-arcade.svg',
       title: 'Arcade',
-      monthly: '$9/mo',
-      yearly: '$99/yr',
+      monthly: 9,
+      yearly: 99,
     };
     const info =
       sub.find((item) => item.title === store.subscription.title) ??
@@ -69,7 +68,12 @@ const App = () => {
         {step === 2 && <Plan store={store} updateStore={updateStore} />}
         {step === 3 && <AddOn store={store} updateStore={updateStore} />}
         {step === 4 && (
-          <Summary summary={getSummary()} isYear={time} gotoStep={gotoStep} />
+          <Summary
+            summary={getSummary()}
+            isYear={time}
+            gotoStep={gotoStep}
+            store={store}
+          />
         )}
         <ControlSteps step={step} updateStep={setStep} />
       </main>
