@@ -70,7 +70,7 @@
   display: flex;
   gap: 1rem;
   flex-direction: column;
-  > .active {
+  > .select {
     background-color: $background-clr-1;
     border: 1px solid $primary-clr;
   }
@@ -103,6 +103,10 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
+      cursor: pointer;
+      &:hover {
+        border: 2px solid $secondary-clr;
+      }
     }
   }
 }
