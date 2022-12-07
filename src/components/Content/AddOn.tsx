@@ -14,11 +14,11 @@ export default function AddOn({
     customProfile: '',
   });
 
-  const handleSelectOnlineAddOn = (add: boolean = true) => {
+  const handleSelectOnlineAddOn = (add: boolean) => {
     const onlineAddOn = {
       title: 'Online service',
-      monthly: '+$1',
-      yearly: '+$10',
+      monthly: 1,
+      yearly: 10,
     };
     if (add) {
       setSelect({...select, online: 'select'});
@@ -40,11 +40,11 @@ export default function AddOn({
       });
     }
   };
-  const handleSelectStorageAddOn = (add: boolean = true) => {
+  const handleSelectStorageAddOn = (add = true) => {
     const extraStorage = {
       title: 'Larger storage',
-      monthly: '+$2',
-      yearly: '+$20',
+      monthly: 2,
+      yearly: 20,
     };
     if (add) {
       setSelect({...select, storage: 'select'});
@@ -70,11 +70,11 @@ export default function AddOn({
       });
     }
   };
-  const handleSelectCustomProfileAddOn = (add: boolean = true) => {
+  const handleSelectCustomProfileAddOn = (add = true) => {
     const customProfileAddOn = {
       title: 'Customizable profile',
-      monthly: '+$1',
-      yearly: '+$10',
+      monthly: 1,
+      yearly: 10,
     };
 
     if (add) {
