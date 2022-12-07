@@ -11,6 +11,7 @@ export default function Complete() {
             className='icon'
           />
         </div>
+        <h2 className='thank-you'>Thank you!</h2>
         <p className='description'>
           Thank you! Thanks for confirming your subscription! We hope you have
           fun using our platform. If you ever need support, please feel free to
