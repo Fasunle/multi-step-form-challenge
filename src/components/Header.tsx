@@ -56,11 +56,11 @@ export default function Header({
         </ul>
       </nav>
       <picture className='bg-sidebar'>
-        <source
+        {/* <source
           media='(min-width: 40em)'
           srcSet='/images/bg-sidebar-desktop.svg'
-        />
-        <img src='/images/bg-sidebar-mobile.svg' alt='' />
+        /> */}
+        {/* <img src='/images/bg-sidebar-mobile.svg' alt='' /> */}
       </picture>
     </header>
   );

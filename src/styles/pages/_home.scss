@@ -45,6 +45,15 @@
       bottom: 0;
       right: 0;
       z-index: -10;
+
+      background: url('/images/bg-sidebar-mobile.svg') no-repeat center;
+      min-height: 10rem;
+
+      @include tablet-up {
+        background: url('/images/bg-sidebar-desktop.svg') no-repeat center;
+        left: 0;
+        min-width: 14rem;
+      }
     }
 
     @include tablet-up {
